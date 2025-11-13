@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Churumbelocos - Menú Venezolano</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #ffe9b4, #f7c16c, #f08a5d);
+      color: #2c1906;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 15px 80px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+      padding: 20px 10px 40px;
+      position: relative;
+    }
+
+    .logo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 10px;
+      animation: girar 12s linear infinite;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo img {
+      width: 95%;
+      height: auto;
+      display: block;
+    }
+
+    @keyframes girar {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #4b1d07;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+
+    .slogan {
+      max-width: 650px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .slogan strong {
+      font-weight: 700;
+    }
+
+    .botones-hero {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primario {
+      background: linear-gradient(135deg, #ff8c42, #ff5e57);
+      color: #fff;
+    }
+
+    .btn-secundario {
+      background: #fff;
+      color: #4b1d07;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      filter: brightness(1.03);
+    }
+
+    .mensaje-especial {
+      margin-top: 10px;
+      max-width: 700px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      padding: 12px 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    /* MENÚ */
+    #menu {
+      margin-top: 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #4b1d07;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 15px;
+    }
+
+    .card {
+      background: rgba(255, 253, 248, 0.94);
+      border-radius: 20px;
+      padding: 15px 15px 18px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transform: translateY(0);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,206,132,0.55), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.28);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 16px;
+      max-height: 190px;
+      object-fit: cover;
+      animation: flotar 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes flotar {
+      from { transform: translateY(0px); }
+      to   { transform: translateY(-6px); }
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 5px;
+      color: #4b1d07;
+    }
+
+    .precio {
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-top: 2px;
+      color: #d35400;
+    }
+
+    .sabores {
+      font-size: 0.86rem;
+      margin-top: 4px;
+      padding-left: 16px;
+    }
+
+    .card-badges {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .badge {
+      background: #ff5e57;
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .boton-card {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .boton-card .btn {
+      flex: 1;
+      min-width: 140px;
+      justify-content: center;
+    }
+
+    /* CARRITO Y FORMULARIO DEL CLIENTE */
+    .carrito {
+      margin-top: 35px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 20px;
+      padding: 18px 16px 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    .carrito h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #4b1d07;
+    }
+
+    #cart-items {
+      font-size: 0.9rem;
+      max-height: 210px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+    }
+
+    #cart-items p {
+      margin-bottom: 6px;
+    }
+
+    #cart-items p span {
+      font-weight: 600;
+    }
+
+    .carrito-total {
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .carrito-botones {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .carrito-botones .btn {
+      flex: 1;
+      min-width: 130px;
+      justify-content: center;
+    }
+
+    .cliente-form {
+      margin-top: 15px;
+      background: rgba(255,248,238,0.95);
+      border-radius: 14px;
+      padding: 12px 12px 10px;
+      border: 1px solid #f1c08b;
+    }
+
+    .cliente-form h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: #4b1d07;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .form-group label {
+      margin-bottom: 3px;
+      font-weight: 600;
+      color: #3b1b0a;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      border-radius: 10px;
+      border: 2px solid #f0b26a;
+      padding: 7px 9px;
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 50px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #ff8c42;
+    }
+
+    /* HORARIOS */
+    .horarios {
+      margin-top: 30px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 14px 18px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.23);
+      font-size: 0.95rem;
+    }
+
+    .horarios h3 {
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+      color: #4b1d07;
+    }
+
+    .horarios ul {
+      list-style: none;
+      margin-left: 5px;
+    }
+
+    .horarios li {
+      margin-bottom: 3px;
+    }
+
+    footer {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #3e220c;
+    }
+
+    .sociales {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .floating-buttons {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 50;
+    }
+
+    .float-btn {
+      border-radius: 999px;
+      padding: 11px 14px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      background: #25d366;
+      color: #fff;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .float-btn.fb {
+      background: #1877f2;
+    }
+
+    .float-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      .logo { width: 150px; height: 150px; }
+      .carrito { margin-top: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HEADER / BIENVENIDA -->
+    <header>
+      <div class="logo">
+        <img src="logo-churumbelocos.png" alt="Logo Churumbelocos">
+      </div>
+      <h1>Bienvenidos a Churumbelocos</h1>
+      <p class="slogan">
+        Aquí podrás encontrar la suculenta tradición venezolana en Nuevo Casas Grandes, Chihuahua. <br />
+        <strong>Dos mentes brillantes se fusionaron para traer la gastronomía venezolana a Nuevo Casas Grandes, Chihuahua, para demostrar que el sabor venezolano no tiene visa.</strong>
+      </p>
+
+      <div class="botones-hero">
+        <button class="btn btn-primario" onclick="irAlMenu()">Ver menú</button>
+        <button class="btn btn-secundario" onclick="irAlCarrito()">Ver carrito</button>
+      </div>
+
+      <div class="mensaje-especial">
+        Todos los viernes disfruta el especial de <strong>5 churumbelos por 150 pesos mexicanos</strong>.  
+        ¡Solo los viernes, no te lo pierdas!
+      </div>
+    </header>
+
+    <!-- MENÚ -->
+    <section id="menu">
+      <h2 class="section-title">Menú Venezolano</h2>
+
+      <div class="menu-grid">
+        <!-- AREPAS -->
+        <article class="card">
+          <div class="card-badges">
+            <div class="badge">Clásico</div>
+          </div>
+          <img src="arepas.jpg" alt="Arepas venezolanas">
+          <h3 class="card-title">Arepas</h3>
+          <p class="precio">$60 MXN</p>
+          <ul class="sabores">
+            <li>Deshebrada de carne</li>
+            <li>Deshebrada de pollo</li>
+            <li>Deshebrada de puerco</li>
+            <li>Jamón y queso</li>
+          </ul>
+          <div class="boton-card">
+            <button class="btn btn-primario" onclick="addToCart('Arepa', 60)">Agregar al carrito</button>
+          </div>
+        </article>
+
+        <!-- EMPANADAS -->
+        <article class="card">
+          <div class="card-badges">
+            <div class="badge">Crocantes</div>
+          </div>
+          <img src="empanadas.jpg" alt="Empanadas venezolanas">
+          <h3 class="card-title">Empanadas</h3>
+          <p class="precio">$50 MXN</p>
+          <ul class="sabores">
+            <li>Deshebrada de carne</li>
+            <li>Deshebrada de pollo</li>
+            <li>Deshebrada de puerco</li>
+            <li>Jamón y queso</li>
+          </ul>
+          <div class="boton-card">
+            <button class="btn btn-primario" onclick="addToCart('Empanada', 50)">Agregar al carrito</button>
+          </div>
+        </article>
+
+        <!-- CHURUMBELOS -->
+        <article class="card">
+          <div class="card-badges">
+            <div class="badge">Favorito</div>
+          </div>
+          <h3 class="card-title">Churumbelos</h3>
+          <p class="precio">$40 MXN</p>
+          <ul class="sabores">
+            <li>Deshebrada de carne</li>
+            <li>Deshebrada de pollo</li>
+            <li>Deshebrada de puerco</li>
+            <li>Jamón y queso</li>
+          </ul>
+          <div class="boton-card">
+            <button class="btn btn-primario" onclick="addToCart('Churumbelo', 40)">Agregar al carrito</button>
+          </div>
+        </article>
+
+        <!-- SALCHIPAPA -->
+        <article class="card">
+          <div class="card-badges">
+            <div class="badge">Street Food</div>
+          </div>
+          <img src="salchipapa.jpg" alt="Salchipapa venezolana">
+          <h3 class="card-title">Salchipapa</h3>
+          <p class="precio">Desde $70 MXN</p>
+          <ul class="sabores">
+            <li>Sencilla: $70 (con winnie)</li>
+            <li>Especial: $100 (winnie, tocino y queso)</li>
+          </ul>
+          <div class="boton-card">
+            <button class="btn btn-primario" onclick="addToCart('Salchipapa sencilla', 70)">Agregar sencilla</button>
+            <button class="btn btn-secundario" onclick="addToCart('Salchipapa especial', 100)">Agregar especial</button>
+          </div>
+        </article>
+
+        <!-- CHICHA -->
+        <article class="card">
+          <div class="card-badges">
+            <div class="badge">Bebida</div>
+          </div>
+          <img src="chicha.jpg" alt="Chicha venezolana">
+          <h3 class="card-title">Chicha Venezolana</h3>
+          <p class="precio">$40 MXN</p>
+          <p class="sabores">
+            Bebida cremosa de arroz, canela y mucho sabor venezolano. Perfecta para acompañar tus arepas,
+            empanadas o churumbelos.
+          </p>
+          <div class="boton-card">
+            <button class="btn btn-primario" onclick="addToCart('Chicha', 40)">Agregar al carrito</button>
+          </div>
+        </article>
+
+        <!-- ESPECIAL VIERNES - 5 CHURUMBELOS -->
+        <article class="card" id="especial-viernes">
+          <div class="card-badges">
+            <div class="badge" id="badge-viernes">Solo viernes</div>
+          </div>
+          <h3 class="card-title">Especial Viernes: 5 Churumbelos</h3>
+          <p class="precio">$150 MXN</p>
+          <p class="sabores">
+            Paquete especial de <strong>5 churumbelos</strong> (sabores a elegir) por solo
+            <strong>$150 pesos mexicanos</strong>. Disponible exclusivamente los viernes.
+          </p>
+          <div class="boton-card">
+            <button class="btn btn-primario" onclick="addSpecialFriday()">Agregar al carrito</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CARRITO + DATOS DEL CLIENTE -->
+    <section class="carrito" id="carrito">
+      <h2>Carrito de compras</h2>
+      <div id="cart-items">
+        <p>Tu carrito está vacío. ¡Comienza agregando algo delicioso del menú!</p>
+      </div>
+      <p class="carrito-total">Total: <span id="cart-total">$0 MXN</span></p>
+
+      <div class="cliente-form">
+        <h3>Datos del cliente para entrega</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nombre">Nombre del cliente *</label>
+            <input type="text" id="nombre" placeholder="Ej: Juan Pérez">
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección completa *</label>
+            <input type="text" id="direccion" placeholder="Calle, número, colonia, ciudad">
+          </div>
+          <div class="form-group">
+            <label for="referencia">Punto de referencia</label>
+            <input type="text" id="referencia" placeholder="Ej: Casa roja frente al Oxxo">
+          </div>
+          <div class="form-group">
+            <label for="pago">Tipo de pago *</label>
+            <select id="pago">
+              <option value="">Selecciona una opción</option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Tarjeta">Tarjeta</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="nota">Nota especial del pedido</label>
+            <textarea id="nota" placeholder="Ej: Sin picante, extra queso, timbrar en el portón..."></textarea>
+          </div>
+        </div>
+        <p style="font-size:0.8rem;margin-top:6px;">Los campos marcados con * son obligatorios para enviar tu pedido por WhatsApp.</p>
+      </div>
+
+      <div class="carrito-botones">
+        <button class="btn btn-secundario" onclick="clearCart()">Vaciar carrito</button>
+        <button class="btn btn-primario" onclick="checkout()">Pedir por WhatsApp</button>
+      </div>
+    </section>
+
+    <!-- HORARIOS -->
+    <section class="horarios">
+      <h3>Horarios de atención</h3>
+      <ul>
+        <li>Jueves a sábado: <strong>10:00 am a 9:00 pm</strong></li>
+        <li>Domingo: <strong>10:00 am a 6:00 pm</strong></li>
+      </ul>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy; <span id="anio-actual"></span> Churumbelocos. Tradición venezolana en Nuevo Casas Grandes, Chihuahua.</p>
+      <div class="sociales">
+        <a href="https://wa.me/526361035898" target="_blank" rel="noopener noreferrer">
+          <button class="btn btn-secundario">WhatsApp</button>
+        </a>
+        <a href="https://www.facebook.com/share/1EN3SUQ8sU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+          <button class="btn btn-secundario">Facebook</button>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- BOTONES FLOTANTES -->
+  <div class="floating-buttons">
+    <button class="float-btn"
+      onclick="window.open('https://wa.me/526361035898','_blank')">
+      WhatsApp
+    </button>
+    <button class="float-btn fb"
+      onclick="window.open('https://www.facebook.com/share/1EN3SUQ8sU/?mibextid=wwXIfr','_blank')">
+      Facebook
+    </button>
+  </div>
+
+  <script>
+    const cart = [];
+
+    function irAlMenu() {
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function irAlCarrito() {
+      document.getElementById('carrito').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderCart() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const cartTotalSpan = document.getElementById('cart-total');
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p>Tu carrito está vacío. ¡Comienza agregando algo delicioso del menú!</p>';
+        cartTotalSpan.textContent = '$0 MXN';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        html += `<p><span>${index + 1}.</span> ${item.nombre} - $${item.precio} MXN</p>`;
+        total += item.precio;
+      });
+
+      cartItemsDiv.innerHTML = html;
+      cartTotalSpan.textContent = `$${total} MXN`;
+    }
+
+    function addToCart(nombre, precio) {
+      cart.push({ nombre, precio });
+      renderCart();
+    }
+
+    function addSpecialFriday() {
+      addToCart('Especial viernes - 5 Churumbelos', 150);
+    }
+
+    function clearCart() {
+      cart.length = 0;
+      renderCart();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Tu carrito está vacío. Agrega productos antes de hacer tu pedido.');
+        return;
+      }
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const direccion = document.getElementById('direccion').value.trim();
+      const referencia = document.getElementById('referencia').value.trim();
+      const pago = document.getElementById('pago').value;
+      const nota = document.getElementById('nota').value.trim();
+
+      if (!nombre || !direccion || !pago) {
+        alert('Por favor llena al menos: Nombre, Dirección y Tipo de pago.');
+        return;
+      }
+
+      let pedidoTexto = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        pedidoTexto += `${index + 1}. ${item.nombre} - $${item.precio} MXN\n`;
+        total += item.precio;
+      });
+
+      pedidoTexto += `\nTotal: $${total} MXN`;
+
+      let datosCliente = `\n\n👤 Nombre: ${nombre}\n📍 Dirección: ${direccion}\n📌 Punto de referencia: ${referencia || 'No especificado'}\n💳 Tipo de pago: ${pago}`;
+      if (nota) {
+        datosCliente += `\n📝 Nota especial: ${nota}`;
+      }
+
+      const mensaje = encodeURIComponent(
+        `Hola, quiero hacer el siguiente pedido:\n\n${pedidoTexto}${datosCliente}`
+      );
+
+      const url = `https://wa.me/526361035898?text=${mensaje}`;
+      window.open(url, '_blank');
+    }
+
+    (function manejarEspecialViernes() {
+      const hoy = new Date().getDay(); // 5 = viernes
+      const badge = document.getElementById('badge-viernes');
+      const card = document.getElementById('especial-viernes');
+
+      if (hoy === 5) {
+        badge.textContent = 'Disponible hoy';
+        card.style.border = '2px solid #ff5e57';
+      } else {
+        badge.textContent = 'Solo viernes';
+        card.style.opacity = '0.97';
+      }
+    })();
+
+    document.getElementById('anio-actual').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
